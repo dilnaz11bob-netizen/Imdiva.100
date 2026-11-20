@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Im'diva — Интернет-магазин эксклюзивных шарфов и платков</title>
+    <title>Im'diva — Каталог</title>
     <style>
         :root {
             --primary: #1e293b;
-            --primary-light: #334155;
             --accent: #25D366;
-            --accent-hover: #1ebe5d;
-            --bg: #ffffff;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --text-muted: #64748b;
+            --bg: #f8fafc;
             --border: #e2e8f0;
-            --radius: 16px;
+            --text-muted: #64748b;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--primary);
             margin: 0;
             padding: 0;
             display: flex;
@@ -29,280 +24,104 @@
             align-items: center;
         }
 
-        /* ЭКРАН 1: ГЛАВНАЯ СТРАНИЦА (WELCOME) */
-        #welcome-screen {
+        .full-screen-container {
             width: 100%;
+            max-width: 600px;
             min-height: 100vh;
+            background: #ffffff;
+            box-sizing: border-box;
+            padding: 16px 16px 100px 16px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            background: #ffffff;
-            position: relative;
-            box-sizing: border-box;
-            padding-bottom: 50px;
         }
 
-        /* Шапка с куском ткани и логотипом */
-        .hero-banner {
-            width: 100%;
-            height: 220px;
-            background-image: url('fabric-bg.jpg'); /* Или прямая ссылка на ткань */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            background-color: #2c3e50; /* Запасной цвет */
-        }
-
-        .logo-container {
-            position: absolute;
-            bottom: -50px;
-            background: #ffffff;
-            padding: 8px 20px;
-            border-radius: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 2px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-img {
-            width: 120px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .welcome-content {
-            margin-top: 70px;
-            width: 100%;
-            max-width: 450px;
-            padding: 0 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        /* Кнопки на двух языках */
-        .btn-action {
-            width: 100%;
-            background: #ffffff;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-
-        .btn-action:hover {
-            background: var(--primary);
-            color: #ffffff;
-        }
-
-        /* Информация о бренде внизу главной */
-        .brand-info-box {
-            margin-top: 30px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-        }
-
-        .brand-info-box h3 {
-            margin: 0 0 8px 0;
-            font-size: 18px;
-            color: var(--primary);
-        }
-
-        .brand-info-box p {
-            margin: 4px 0;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .instagram-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-            color: #E1306C;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        /* ЭКРАН 2: КАТАЛОГ И КОРЗИНА (скрыт по умолчанию) */
-        #catalog-screen {
-            display: none;
-            width: 100%;
-            max-width: 950px;
-            padding: 24px 20px 100px 20px;
-            box-sizing: border-box;
-        }
-
-        .catalog-box {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: var(--radius);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-        }
-
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 16px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .header-bar h2 {
-            margin: 0;
-            font-size: 20px;
-            color: var(--primary);
-        }
-
-        .btn-back {
-            background: #f1f5f9;
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* Сетка категорий 3x3 */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        @media (max-width: 600px) {
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-        }
-
-        .category-card {
-            background: #ffffff;
-            border-radius: var(--radius);
-            padding: 16px 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            aspect-ratio: 1 / 1.1;
-            border: 1px solid var(--border);
-            transition: transform 0.2s;
-        }
-
-        .category-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .category-icon {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            background: #f8fafc;
-        }
-
-        .category-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.3;
-        }
-
-        .category-count {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* Верхняя панель категорий */
-        .top-categories-bar {
+        /* ВЕРХНЯЯ ГОРИЗОНТАЛЬНАЯ ПАНЕЛЬ КАТЕГОРИЙ (маленькие квадратики) */
+        .top-categories-scroll {
             display: flex;
             gap: 10px;
             overflow-x: auto;
             padding-bottom: 12px;
-            margin-bottom: 20px;
-            scrollbar-width: thin;
+            margin-bottom: 16px;
+            scrollbar-width: none; /* Скрыть скроллбар для красоты */
+        }
+        .top-categories-scroll::-webkit-scrollbar {
+            display: none;
         }
 
-        .top-cat-pill {
+        .top-cat-item {
+            flex: 0 0 auto;
+            width: 70px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .top-cat-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 14px;
+            background: #1e293b; /* Тот самый темно-синий цвет из макета */
+            overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 30px;
-            cursor: pointer;
-            white-space: nowrap;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-muted);
+            justify-content: center;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.2s;
         }
 
-        .top-cat-pill.active {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
+        .top-cat-item.active .top-cat-box {
+            border-color: #25D366;
+            transform: scale(1.05);
         }
 
-        .top-cat-pill img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+        .top-cat-box img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
-        /* Сетка товаров */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
+        .top-cat-title {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+            color: var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .product-card {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+        /* ОСНОВНАЯ СЕТКА ТОВАРОВ НА ВЕСЬ ЭКРАН (большие квадраты) */
+        .products-grid-fullscreen {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            flex-grow: 1;
+        }
+
+        .product-card-fs {
+            background: #1e293b; /* Темно-синий фон карточки как на макете */
+            border-radius: 20px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            aspect-ratio: 1 / 1.25;
         }
 
-        .product-card.out-of-stock {
+        .product-card-fs.out-of-stock {
             opacity: 0.55;
         }
 
-        .product-image-wrap {
-            position: relative;
+        .product-image-fs {
             width: 100%;
-            height: 200px;
-            background: #f8fafc;
+            height: 75%;
+            position: relative;
+            background: #0f172a;
         }
 
-        .product-image-wrap img {
+        .product-image-fs img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -314,73 +133,78 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             color: #ffffff;
-            padding: 7px 12px;
+            padding: 8px 14px;
             border-radius: 8px;
             font-weight: 700;
             font-size: 12px;
             white-space: nowrap;
-            pointer-events: none;
         }
 
-        .product-body {
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .product-title {
-            font-weight: 600;
-            font-size: 13px;
-            margin: 0 0 10px 0;
-            color: var(--primary);
-        }
-
-        .product-footer {
+        .product-info-fs {
+            padding: 10px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #1e293b;
+            color: #ffffff;
+            flex-grow: 1;
         }
 
-        .product-price {
-            font-weight: 800;
-            font-size: 15px;
-            color: var(--primary);
+        .product-title-price {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .btn-add {
-            background: var(--primary);
-            color: white;
+        .product-title-fs {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 110px;
+        }
+
+        .product-price-fs {
+            font-size: 13px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .btn-add-fs {
+            background: #ffffff;
+            color: #1e293b;
             border: none;
-            padding: 7px 12px;
+            padding: 6px 10px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
         }
 
-        .btn-add:disabled {
-            background: #cbd5e1;
+        .btn-add-fs:disabled {
+            background: #475569;
+            color: #94a3b8;
             cursor: not-allowed;
         }
 
-        /* Плавающая корзина снизу (черточка) */
+        /* ПЛАВАЮЩАЯ КОРЗИНА СНИЗУ (черточка) */
         .floating-cart-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: var(--primary);
+            background: #1e293b;
             color: white;
-            padding: 16px 24px;
+            padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-sizing: border-box;
-            box-shadow: 0 -6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
             cursor: pointer;
             z-index: 1000;
         }
@@ -388,10 +212,10 @@
         .floating-cart-bar::before {
             content: '';
             position: absolute;
-            top: 6px;
+            top: 5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
+            width: 36px;
             height: 4px;
             background: rgba(255, 255, 255, 0.4);
             border-radius: 2px;
@@ -400,43 +224,41 @@
         .cart-info-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 4px;
         }
 
         .cart-badge-count {
             background: var(--accent);
             color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 12px;
         }
 
         .cart-total-right {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             margin-top: 4px;
         }
 
-        /* Модальное окно корзины */
+        /* МОДАЛЬНОЕ ОКНО КОРЗИНЫ */
         .cart-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
             align-items: flex-end;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
         .cart-modal-overlay.open {
@@ -447,16 +269,17 @@
         .cart-modal {
             background: #ffffff;
             width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            border-radius: 24px 24px 0 0;
-            padding: 24px;
+            max-width: 550px;
+            max-height: 85vh;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             transform: translateY(100%);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.3s ease;
             overflow-y: auto;
+            color: #1e293b;
         }
 
         .cart-modal-overlay.open .cart-modal {
@@ -467,39 +290,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
             border-bottom: 2px solid var(--border);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .cart-modal-header h3 {
             margin: 0;
-            color: var(--primary);
-            font-size: 18px;
+            font-size: 17px;
         }
 
         .btn-close-modal {
             background: #f1f5f9;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
-            color: var(--text-muted);
+            font-size: 14px;
         }
 
         .cart-items-list {
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--border);
         }
 
@@ -510,7 +331,7 @@
         .cart-item-title {
             font-weight: 600;
             font-size: 13px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .cart-item-price {
@@ -521,19 +342,19 @@
         .quantity-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin: 0 10px;
+            gap: 6px;
+            margin: 0 8px;
         }
 
         .qty-btn {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border: 1px solid var(--border);
             background: #f8fafc;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .btn-remove {
@@ -541,19 +362,19 @@
             border: none;
             color: #ef4444;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .customer-form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 14px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .customer-form input, .customer-form textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 10px;
             border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 13px;
@@ -566,12 +387,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 14px;
-            padding-top: 10px;
+            margin-bottom: 12px;
+            padding-top: 8px;
             border-top: 2px solid var(--border);
-            color: var(--primary);
         }
 
         .btn-whatsapp {
@@ -579,15 +399,11 @@
             background-color: var(--accent);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 13px;
             border-radius: 10px;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
         .btn-whatsapp:disabled {
@@ -599,51 +415,26 @@
             text-align: center;
             color: var(--text-muted);
             padding: 30px 0;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН 1: ГЛАВНАЯ (WELCOME) -->
-    <div id="welcome-screen">
-        <div class="hero-banner">
-            <div class="logo-container">
-                <img src="37918-removebg-preview.png" alt="Im'diva Logo" class="logo-img">
-            </div>
+    <div class="full-screen-container">
+        <!-- 1. ВЕРХНЯЯ ПАНЕЛЬ (Маленькие квадратики категорий для быстрого переключения) -->
+        <div id="top-categories-container" class="top-categories-scroll">
+            <div class="loading-msg">Загрузка...</div>
         </div>
 
-        <div class="welcome-content">
-            <button class="btn-action" onclick="goToCatalog()">Тапсырыс беру</button>
-            <button class="btn-action" onclick="goToCatalog()">Оформление заказа</button>
-
-            <div class="brand-info-box">
-                <h3>Im'diva</h3>
-                <p><b>Алматы</b> • Онлайн-магазин</p>
-                <p>📞 8 707 778 76 61</p>
-                <a href="https://instagram.com/d_iva_brand" target="_blank" class="instagram-link">
-                    📷 d_iva_brand
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- ЭКРАН 2: КАТАЛОГ И ТОВАРЫ -->
-    <div id="catalog-screen">
-        <div class="catalog-box">
-            <div class="header-bar">
-                <h2 id="catalog-heading">Категории</h2>
-                <button id="back-btn" class="btn-back" onclick="showCategories()" style="display: none;">
-                    ← Все категории
-                </button>
-            </div>
-            <div id="catalog-content">
-                <div class="loading-msg">Загрузка каталога...</div>
-            </div>
+        <!-- 2. ОСНОВНАЯ СЕТКА ТОВАРОВ НА ВЕСЬ ЭКРАН -->
+        <div id="products-fullscreen-grid" class="products-grid-fullscreen">
+            <div class="loading-msg" style="grid-column: span 2;">Загрузка товаров из таблицы...</div>
         </div>
     </div>
 
     <!-- ПЛАВАЮЩАЯ КОРЗИНА СНИЗУ -->
-    <div id="floating-cart" class="floating-cart-bar" onclick="toggleCartModal(true)" style="display: none;">
+    <div class="floating-cart-bar" onclick="toggleCartModal(true)">
         <div class="cart-info-left">
             🛒 <span>Корзина</span>
             <span id="floating-cart-count" class="cart-badge-count">0</span>
@@ -688,18 +479,8 @@
 
     let products = [];
     let cart = [];
-    let currentView = 'categories';
     let selectedCategory = "";
     let lastKnownCategory = "Другие модели";
-
-    function goToCatalog() {
-        document.getElementById('welcome-screen').style.display = 'none';
-        document.getElementById('catalog-screen').style.display = 'block';
-        document.getElementById('floating-cart').style.display = 'flex';
-        if (products.length === 0) {
-            loadProductsFromSheet();
-        }
-    }
 
     function formatDriveImageUrl(url) {
         if (!url) return "https://via.placeholder.com/300x300?text=Шарф";
@@ -752,11 +533,16 @@
                 });
             });
 
-            showCategories();
+            const categoryNames = [...new Set(products.map(p => p.category))];
+            if (categoryNames.length > 0) {
+                selectedCategory = categoryNames[0]; // Выбираем первую категорию по умолчанию
+            }
+
+            renderUI();
         } catch (error) {
             console.error("Ошибка загрузки:", error);
-            document.getElementById('catalog-content').innerHTML = `
-                <div class="loading-msg" style="color: #ef4444;">
+            document.getElementById('products-fullscreen-grid').innerHTML = `
+                <div class="loading-msg" style="color: #ef4444; grid-column: span 2;">
                     Не удалось загрузить данные из таблицы. Проверьте доступ.
                 </div>
             `;
@@ -768,90 +554,63 @@
         return lower.includes("авторские платки") || lower.includes("авторлік");
     }
 
-    function showCategories() {
-        currentView = 'categories';
-        document.getElementById('catalog-heading').textContent = "Категории";
-        document.getElementById('back-btn').style.display = "none";
+    function selectCategory(catName) {
+        selectedCategory = catName;
+        renderUI();
+    }
 
-        const container = document.getElementById('catalog-content');
+    function renderUI() {
         const categoryNames = [...new Set(products.map(p => p.category))];
+        const topContainer = document.getElementById('top-categories-container');
+        const gridContainer = document.getElementById('products-fullscreen-grid');
 
-        if (categoryNames.length === 0) {
-            container.innerHTML = '<div class="loading-msg">Категории не найдены</div>';
-            return;
-        }
-
-        const cardsHtml = categoryNames.map(catName => {
-            const itemsInCat = products.filter(p => p.category === catName);
-            let coverImage = itemsInCat[0]?.image || "https://via.placeholder.com/150";
-            if (isAuthorCategory(catName)) {
-                coverImage = "38036-removebg-preview.png";
+        // 1. Рендер верхней панели маленьких квадратиков
+        topContainer.innerHTML = categoryNames.map(cat => {
+            const itemsInCat = products.filter(p => p.category === cat);
+            let icon = itemsInCat[0]?.image || "https://via.placeholder.com/150";
+            if (isAuthorCategory(cat)) {
+                icon = "38036-removebg-preview.png"; // Имя файла для авторских платков из GitHub
             }
-            const safeCatName = catName.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+            const isActive = cat === selectedCategory ? 'active' : '';
+            const safeCat = cat.replace(/'/g, "\\'").replace(/"/g, "&quot;");
 
             return `
-                <div class="category-card" onclick="openCategory('${safeCatName}')">
-                    <img class="category-icon" src="${coverImage}" alt="${catName}">
-                    <div class="category-name">${catName}</div>
-                    <div class="category-count">${itemsInCat.length} шт.</div>
+                <div class="top-cat-item ${isActive}" onclick="selectCategory('${safeCat}')">
+                    <div class="top-cat-box">
+                        <img src="${icon}" alt="${cat}">
+                    </div>
+                    <div class="top-cat-title">${cat}</div>
                 </div>
             `;
         }).join('');
 
-        container.innerHTML = `<div class="categories-grid">${cardsHtml}</div>`;
-    }
+        // 2. Рендер основной сетки товаров выбранной категории на весь экран
+        const filteredProducts = products.filter(p => p.category === selectedCategory);
 
-    function openCategory(catName) {
-        currentView = 'products';
-        selectedCategory = catName;
-        document.getElementById('catalog-heading').textContent = catName;
-        document.getElementById('back-btn').style.display = "inline-block";
+        if (filteredProducts.length === 0) {
+            gridContainer.innerHTML = '<div class="loading-msg" style="grid-column: span 2;">В этой категории пока нет товаров</div>';
+            return;
+        }
 
-        const container = document.getElementById('catalog-content');
-        const categoryNames = [...new Set(products.map(p => p.category))];
-
-        const topBarHtml = `
-            <div class="top-categories-bar">
-                ${categoryNames.map(cat => {
-                    const items = products.filter(p => p.category === cat);
-                    let icon = items[0]?.image || "";
-                    if (isAuthorCategory(cat)) {
-                        icon = "38036-removebg-preview.png";
-                    }
-                    const isActive = cat === selectedCategory ? 'active' : '';
-                    const safeCat = cat.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-                    return `
-                        <div class="top-cat-pill ${isActive}" onclick="openCategory('${safeCat}')">
-                            ${icon ? `<img src="${icon}" alt="">` : ''}
-                            <span>${cat}</span>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-        `;
-
-        const filtered = products.filter(p => p.category === catName);
-        const productsHtml = filtered.map(product => `
-            <div class="product-card ${!product.inStock ? 'out-of-stock' : ''}">
-                <div class="product-image-wrap">
+        gridContainer.innerHTML = filteredProducts.map(product => `
+            <div class="product-card-fs ${!product.inStock ? 'out-of-stock' : ''}">
+                <div class="product-image-fs">
                     <img src="${product.image}" alt="${product.name}" loading="lazy">
                     ${!product.inStock ? '<div class="out-of-stock-badge">Нет в наличии</div>' : ''}
                 </div>
-                <div class="product-body">
-                    <h4 class="product-title">${product.name}</h4>
-                    <div class="product-footer">
-                        <span class="product-price">${product.price.toLocaleString('ru-RU')} ₸</span>
-                        <button class="btn-add" 
-                                onclick="addToCart(${product.id})" 
-                                ${!product.inStock ? 'disabled' : ''}>
-                            ${product.inStock ? '+ В корзину' : 'Нет'}
-                        </button>
+                <div class="product-info-fs">
+                    <div class="product-title-price">
+                        <h4 class="product-title-fs" title="${product.name}">${product.name}</h4>
+                        <span class="product-price-fs">${product.price.toLocaleString('ru-RU')} ₸</span>
                     </div>
+                    <button class="btn-add-fs" 
+                            onclick="addToCart(${product.id})" 
+                            ${!product.inStock ? 'disabled' : ''}>
+                        ${product.inStock ? '+ В корзину' : 'Нет'}
+                    </button>
                 </div>
             </div>
         `).join('');
-
-        container.innerHTML = topBarHtml + `<div class="products-grid">${productsHtml}</div>`;
     }
 
     function toggleCartModal(open) {
@@ -984,8 +743,10 @@
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`, '_blank');
     }
+
+    // Загружаем данные из Google Таблицы при старте
+    loadProductsFromSheet();
 </script>
 
 </body>
 </html>
-
